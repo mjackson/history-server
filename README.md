@@ -56,6 +56,7 @@ Then use that file with `history-server -c config.js`.
 ## Usage in node
 
 ```js
+const path = require('path')
 const { createServer } = require('history-server')
 
 const server = createServer([
