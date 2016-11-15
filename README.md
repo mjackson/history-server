@@ -80,7 +80,7 @@ const server = createServer([
 
 When mounting multiple HTML5 apps on the same domain, you should be sure to:
 
-- **use the correct `<base href>`** in your HTML document. `<base href>` specifies the base URL to use for all relative URLs in the document, and should be the `path` of your app with a trailing slash, i.e. `/one/` for an app with a path of `/one`
 - **use relative paths** when you link to other resources such as scripts and images, i.e. use `<script src="index.js"></script>` instead of `<script src="/index.js"></script>`. Otherwise your request will go to the root URL instead of your app
+- **use `<base href>`** in your HTML document to specify the base URL to use for all relative URLs in the document. This should be the `path` of your app with a trailing slash, e.g. `/one/` for an app with a `path` of `/one`
 
 That's it! Enjoy :)
