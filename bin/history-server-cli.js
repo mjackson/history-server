@@ -29,7 +29,8 @@ const printUsage = () => {
   ## Configuration
 
   To serve a single app, just point history-server at a root directory
-  that contains an index.html file to serve at the / URL.
+  that contains an index.html file to serve at the / URL, using e.g.
+  "history-server app".
 
   To serve many apps, you'll need a way to tell history-server which apps
   should be served at which URLs. The simplest way to do this is to just

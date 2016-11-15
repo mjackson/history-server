@@ -2,26 +2,56 @@
 
 [`history-server`](https://npmjs.com/package/history-server) is an HTTP server for single-page apps that use the HTML5 `history` API including `history.pushState`, `history.replaceState`, and the `popstate` event. The server is capable of serving multiple apps from the same domain and is built on top of [`express`](https://www.npmjs.com/package/express).
 
-
 ## Installation
 
-    npm install --save history-server
+    npm install -g history-server
 
-## CLI Usage
+## Usage
 
-To serve a single HTML5 app using the CLI, just point the server at the root directory:
+    history-server -a apps
+    history-server -c config.js
+    history-server root
 
-    history-server apps/one
+## Flags
 
-To serve more than one app, first create a configuration file that exports an array of `{ path, root, options }` objects where:
+    -a, --apps      The path to a directory that contains many apps
+    -c, --config    The path to a module that exports the server config
+    -h, --help      Show this help message
 
-- `path` is the URL path pattern (uses `path-to-regexp`)
-- `root` is the root directory that contains the `index.html` file
-- `options` are any options you want to pass to [`express.static`](http://expressjs.com/en/api.html#express.static)
+## Configuration
 
-Then invoke the CLI with the path to your config file:
+To serve a single app, just point history-server at a root directory that contains an index.html file to serve at the / URL, using e.g. `history-server app`.
 
-    history-server --config apps.js
+To serve many apps, you'll need a way to tell history-server which apps should be served at which URLs. The simplest way to do this is to just use the file system to layout your apps like you want your URLs to look.
+
+For example, consider the following directory tree:
+
+    apps/
+    ├── one
+    │   ├── index.html
+    │   └── index.js
+    └── two
+        ├── index.html
+        ├── index.js
+        └── three
+            ├── index.html
+            └── index.js
+
+You can use `history-server -a apps` serve all 3 of these apps at the following URLs, in matching order:
+
+    /two/three => apps/two/three
+    /one       => apps/one
+    /two       => apps/two
+
+Care is taken to match the apps with the longest URLs first, because they are the most specific.
+
+If you need more fine-grained control over the server's configuration, you can use a JavaScript module that exports an array of `{ path, root, options }` objects where:
+
+- `path` is the URL pattern, i.e. /the/url
+- `root` is the root directory of the app on disk
+- `options` are [`express.static`](http://expressjs.com/en/api.html#express.static) options
+
+Then use that file with `history-server -c config.js`.
 
 ## Usage in node
 
