@@ -15,9 +15,9 @@ To serve a single HTML5 app using the CLI, just point the server at the root dir
 
 To serve more than one app, provide the path to a configuration file that exports an array of `{ path, root, options }` objects where:
 
-    - `path` is the URL path pattern (uses `path-to-regexp`)
-    - `root` is the root directory that contains the `index.html` file
-    - `options` are any options you want to pass to [`express.static`](http://expressjs.com/en/api.html#express.static)
+- `path` is the URL path pattern (uses `path-to-regexp`)
+- `root` is the root directory that contains the `index.html` file
+- `options` are any options you want to pass to [`express.static`](http://expressjs.com/en/api.html#express.static)
 
 ## Usage in node
 
