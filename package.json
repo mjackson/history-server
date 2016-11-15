@@ -1,6 +1,6 @@
 {
   "name": "history-server",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "An HTTP server for single-page apps that use the HTML5 history API",
   "repo": "mjackson/history-server",
   "author": "Michael Jackson",
