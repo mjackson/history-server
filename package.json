@@ -2,6 +2,7 @@
   "name": "history-server",
   "version": "0.0.1",
   "description": "An HTTP server for single-page apps that use the HTML5 history API",
+  "repo": "mjackson/history-server",
   "author": "Michael Jackson",
   "license": "MIT",
   "bin": {
