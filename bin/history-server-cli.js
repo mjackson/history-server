@@ -16,15 +16,23 @@ const printUsage = () => {
   console.log(`
   ## Usage
 
-    history-server -a apps
-    history-server -c config.js
-    history-server root
+    The easiest way to use history-server is to point the binary at an "app"
+    directory that contains your index.html file.
 
-  ## Flags
+      $ history-server app
 
-    -a, --apps      The path to a directory that contains many apps
-    -c, --config    The path to a module that exports the server config
-    -h, --help      Show this help message
+    Alternatively, you may serve many apps from the same domain using a
+    directory that contains many apps or a config file (see Configuration below).
+
+      $ history-server -a apps
+      $ history-server -c config.js
+
+    You can use the following flags:
+
+      -h, --help      Show this help message
+      -a, --apps      The path to a directory that contains many apps
+      -c, --config    The path to a module that exports the server config
+      -p, --port      The port to bind to, defaults to 5000
 
   ## Configuration
 
@@ -38,16 +46,16 @@ const printUsage = () => {
 
   For example, consider the following directory tree:
 
-  apps/
-  ├── one
-  │   ├── index.html
-  │   └── index.js
-  └── two
-      ├── index.html
-      ├── index.js
-      └── three
-          ├── index.html
-          └── index.js
+    apps/
+    ├── one
+    │   ├── index.html
+    │   └── index.js
+    └── two
+        ├── index.html
+        ├── index.js
+        └── three
+            ├── index.html
+            └── index.js
 
   You can use "history-server -a apps" serve all 3 of these apps at the
   following URLs, in matching order:
@@ -90,7 +98,7 @@ if (hasFlag('-h') || hasFlag('--help')) {
 
 const startServer = (config) => {
   const server = createServer(config)
-  const port = getArg('-p') || getArg('--port') || 8080
+  const port = getArg('-p') || getArg('--port') || 5000
 
   server.listen(port, () => {
     console.log('history-server listening on port %s; Ctrl+C to stop', port)

@@ -8,15 +8,21 @@
 
 ## Usage
 
-    history-server -a apps
-    history-server -c config.js
-    history-server root
+The easiest way to use `history-server` is to point the binary at an `app` directory that contains your `index.html` file.
 
-## Flags
+    $ history-server app
 
+Alternatively, you may serve many apps from the same domain using a directory that contains many apps or a config file (see [Configuration](#configuration) below).
+
+    $ history-server -a apps
+    $ history-server -c config.js
+
+You can use the following flags:
+
+    -h, --help      Show this help message
     -a, --apps      The path to a directory that contains many apps
     -c, --config    The path to a module that exports the server config
-    -h, --help      Show this help message
+    -p, --port      The port to bind to, defaults to 5000
 
 ## Configuration
 
