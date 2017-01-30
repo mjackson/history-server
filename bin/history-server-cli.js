@@ -32,7 +32,7 @@ const printUsage = () => {
       -h, --help      Show this help message
       -a, --apps      The path to a directory that contains many apps
       -c, --config    The path to a module that exports the server config
-      -p, --port      The port to bind to, defaults to 5000
+      -p, --port      The port to bind to, defaults to 8080
 
   ## Configuration
 
@@ -98,7 +98,7 @@ if (hasFlag('-h') || hasFlag('--help')) {
 
 const startServer = (config) => {
   const server = createServer(config)
-  const port = getArg('-p') || getArg('--port') || 5000
+  const port = getArg('-p') || getArg('--port') || 8080
 
   server.listen(port, () => {
     console.log('history-server listening on port %s; Ctrl+C to stop', port)

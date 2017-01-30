@@ -22,7 +22,7 @@ You can use the following flags:
     -h, --help      Show this help message
     -a, --apps      The path to a directory that contains many apps
     -c, --config    The path to a module that exports the server config
-    -p, --port      The port to bind to, defaults to 5000
+    -p, --port      The port to bind to, defaults to 8080
 
 ## Configuration
 
