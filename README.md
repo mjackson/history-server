@@ -1,6 +1,6 @@
 # history-server
 
-[`history-server`](https://npmjs.com/package/history-server) is an HTTP server for single-page apps that use the HTML5 `history` API including `history.pushState`, `history.replaceState`, and the `popstate` event. The server is capable of serving multiple apps from the same domain and is built on top of [`express`](https://www.npmjs.com/package/express).
+[`history-server`](https://npmjs.com/package/history-server) is an HTTP server for websites that are composed of many single-page apps (i.e. apps that use the HTML5 `history` API including `history.pushState`, `history.replaceState`, and the `popstate` event). The server is capable of serving many apps from various directories and even different hosts, all from the same domain.
 
 ## Installation
 
@@ -26,9 +26,20 @@ You can use the following flags:
 
 ## Configuration
 
+`history-server` accepts an array of "apps" as configuration. Each app is an object of `{ path, root, options, proxy }` where:
+
+- `path` is the URL pattern, i.e. /the/url (required)
+- `root` is the root directory of the app on disk (optional, only for same host)
+- `options` are [`express.static`](http://expressjs.com/en/api.html#express.static) options (optional, only used with `root`)
+- `proxy` is the target URL on another host (e.g. `http://www.example.com/path`) or [an options object](https://github.com/nodejitsu/node-http-proxy#options) to `http-proxy` (optional, for different hosts)
+
+Save your configuration in a module called `config.js`, then start a server with `history-server -c config.js`.
+
+## Simple Configuration on a Single Host
+
 To serve a single app, just point history-server at a root directory that contains an index.html file to serve at the / URL, using e.g. `history-server app`.
 
-To serve many apps, you'll need a way to tell history-server which apps should be served at which URLs. The simplest way to do this is to just use the file system to layout your apps like you want your URLs to look.
+To serve many apps on the same host, you'll need a way to tell history-server which apps should be served at which URLs. An easy way to do this is to just use the file system to layout your apps like you want your URLs to look.
 
 For example, consider the following directory tree:
 
@@ -51,14 +62,6 @@ You can use `history-server -a apps` serve all 3 of these apps at the following 
 
 Care is taken to match the apps with the longest URLs first, because they are the most specific.
 
-If you need more fine-grained control over the server's configuration, you can use a JavaScript module that exports an array of `{ path, root, options }` objects where:
-
-- `path` is the URL pattern, i.e. /the/url
-- `root` is the root directory of the app on disk
-- `options` are [`express.static`](http://expressjs.com/en/api.html#express.static) options
-
-Then use that file with `history-server -c config.js`.
-
 ## Usage in node
 
 ```js
@@ -79,6 +82,11 @@ const server = createServer([
   // Any request that begins with "/two" will serve apps/two/index.html
   { path: '/two',
     root: path.resolve(__dirname, 'apps/two')
+  },
+
+  // Proxies all requests to "/proxy" through to another host
+  { path: '/proxy',
+    proxy: 'http://www.example.com/path'
   }
 ])
 ```
