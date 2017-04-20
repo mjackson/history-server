@@ -17,7 +17,7 @@ Alternatively, you may serve many apps from the same domain using a directory th
     $ history-server -a apps
     $ history-server -c config.js
 
-You can use the following flags:
+You may use the following flags:
 
     -h, --help      Show this help message
     -a, --apps      The path to a directory that contains many apps
