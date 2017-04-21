@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 const path = require('path')
-const { createServer, createAppsConfig } = require('../modules')
+const { createServer, createAppsConfig } = require('./index')
 
 const argv = process.argv
 

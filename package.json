@@ -7,7 +7,7 @@
   "author": "Michael Jackson",
   "license": "MIT",
   "bin": {
-    "history-server": "./bin/history-server-cli.js"
+    "history-server": "./history-server.js"
   },
   "dependencies": {
     "express": "^4.14.0",
