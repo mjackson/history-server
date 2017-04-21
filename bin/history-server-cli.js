@@ -37,10 +37,16 @@ const printConfig = (config) => {
     return memo.length > path.length ? memo : path
   }, '')
 
-  config.forEach(({ path: pattern, root }) => {
+  config.forEach(({ path: pattern, proxy, root }) => {
     const trailingSpaces = longestPath.length - pattern.length
     const trailingSpace = new Array(trailingSpaces + 1).join(' ')
-    console.log('  %s%s => %s', pattern, trailingSpace, path.relative(process.cwd(), root))
+
+    console.log(
+      '  %s%s => %s',
+      pattern,
+      trailingSpace,
+      (proxy && proxy.target) || proxy || path.relative(process.cwd(), root)
+    )
   })
 }
 
