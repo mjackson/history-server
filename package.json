@@ -10,6 +10,9 @@
   "bin": {
     "history-server": "./modules/cli.js"
   },
+  "files": [
+    "modules"
+  ],
   "scripts": {
     "lint": "eslint modules",
     "test": "npm run lint"
