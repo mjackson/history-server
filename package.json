@@ -6,8 +6,13 @@
   "preferGlobal": true,
   "author": "Michael Jackson",
   "license": "MIT",
+  "main": "./modules/index.js",
   "bin": {
-    "history-server": "./history-server.js"
+    "history-server": "./modules/cli.js"
+  },
+  "scripts": {
+    "lint": "eslint modules",
+    "test": "npm run lint"
   },
   "dependencies": {
     "express": "^4.14.0",
@@ -19,5 +24,8 @@
     "pushState",
     "html5",
     "express"
-  ]
+  ],
+  "devDependencies": {
+    "eslint": "^4.17.0"
+  }
 }
