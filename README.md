@@ -1,3 +1,10 @@
+# history-server [![Travis][build-badge]][build] [![npm package][npm-badge]][npm]
+
+[build-badge]: https://img.shields.io/travis/mjackson/history-server/master.svg?style=flat-square
+[build]: https://travis-ci.org/mjackson/history-server
+[npm-badge]: https://img.shields.io/npm/v/history-server.svg?style=flat-square
+[npm]: https://www.npmjs.org/package/history-server
+
 # history-server
 
 [`history-server`](https://npmjs.com/package/history-server) is an HTTP server for websites that are composed of many single-page apps (i.e. apps that use the HTML5 `history` API including `history.pushState`, `history.replaceState`, and the `popstate` event). The server is capable of serving many apps from various directories and even different hosts, all from the same domain.
