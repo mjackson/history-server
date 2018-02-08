@@ -5,8 +5,6 @@
 [npm-badge]: https://img.shields.io/npm/v/history-server.svg?style=flat-square
 [npm]: https://www.npmjs.org/package/history-server
 
-# history-server
-
 [`history-server`](https://npmjs.com/package/history-server) is an HTTP server for websites that are composed of many single-page apps (i.e. apps that use the HTML5 `history` API including `history.pushState`, `history.replaceState`, and the `popstate` event). The server is capable of serving many apps from various directories and even different hosts, all from the same domain.
 
 ## Installation
@@ -35,10 +33,10 @@ You may use the following flags:
 
 `history-server` accepts an array of "apps" as configuration. Each app is an object of `{ path, root, options, proxy }` where:
 
-- `path` is the URL pattern, i.e. /the/url (required)
-- `root` is the root directory of the app on disk (optional, only for same host)
-- `options` are [`express.static`](http://expressjs.com/en/api.html#express.static) options (optional, only used with `root`)
-- `proxy` is the target URL on another host (e.g. `http://www.example.com/path`) or [an options object](https://github.com/nodejitsu/node-http-proxy#options) to `http-proxy` (optional, for different hosts)
+* `path` is the URL pattern, i.e. /the/url (required)
+* `root` is the root directory of the app on disk (optional, only for same host)
+* `options` are [`express.static`](http://expressjs.com/en/api.html#express.static) options (optional, only used with `root`)
+* `proxy` is the target URL on another host (e.g. `http://www.example.com/path`) or [an options object](https://github.com/nodejitsu/node-http-proxy#options) to `http-proxy` (optional, for different hosts)
 
 Save your configuration in a module called `config.js`, then start a server with `history-server -c config.js`.
 
@@ -72,37 +70,41 @@ Care is taken to match the apps with the longest URLs first, because they are th
 ## Usage in node
 
 ```js
-const path = require('path')
-const { createServer } = require('history-server')
+const path = require("path");
+const { createServer } = require("history-server");
 
 const server = createServer([
   // Any request that begins with "/one" will use apps/one/index.html
-  { path: '/one',
-    root: path.resolve(__dirname, 'apps/one')
+  {
+    path: "/one",
+    root: path.resolve(__dirname, "apps/one")
   },
 
   // Any request that begins with "/two/three" will serve apps/two/index.html
-  { path: '/two/three',
-    root: path.resolve(__dirname, 'apps/two')
+  {
+    path: "/two/three",
+    root: path.resolve(__dirname, "apps/two")
   },
 
   // Any request that begins with "/two" will serve apps/two/index.html
-  { path: '/two',
-    root: path.resolve(__dirname, 'apps/two')
+  {
+    path: "/two",
+    root: path.resolve(__dirname, "apps/two")
   },
 
   // Proxies all requests to "/proxy" through to another host
-  { path: '/proxy',
-    proxy: 'http://www.example.com/path'
+  {
+    path: "/proxy",
+    proxy: "http://www.example.com/path"
   }
-])
+]);
 ```
 
 ## Tips
 
 When mounting multiple HTML5 apps on the same domain, you should be sure to:
 
-- **use relative URLs** when you link to resources such as scripts and images, i.e. use `<script src="index.js"></script>` instead of `<script src="/index.js"></script>`. Otherwise your request will go to the root URL instead of your app
-- **use [`<base href>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base)** to specify the base URL to use for all those relative URLs. This should be the `path` of your app with a trailing slash, e.g. `/one/` for an app with a `path` of `/one`
+* **use relative URLs** when you link to resources such as scripts and images, i.e. use `<script src="index.js"></script>` instead of `<script src="/index.js"></script>`. Otherwise your request will go to the root URL instead of your app
+* **use [`<base href>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base)** to specify the base URL to use for all those relative URLs. This should be the `path` of your app with a trailing slash, e.g. `/one/` for an app with a `path` of `/one`
 
 That's it! Enjoy :)
